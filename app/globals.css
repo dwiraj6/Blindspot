@@ -1,0 +1,181 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #ece6da;
+  --color-surface: #e2dacb;
+  --color-surface-2: #d6cdbb;
+  --color-ink: #16181b;
+  --color-muted: #4f5458;
+  --color-accent: #d9480f;
+  --color-accent-press: #b93c0b;
+  --color-green: #1e3a2f;
+  --color-green-2: #2b4f40;
+  --color-green-3: #3d6655;
+  --color-green-4: #5a8070;
+  --color-green-5: #7f9c8e;
+  --color-green-6: #a9bdb1;
+  --color-silt: #c8b48e;
+  --color-night: #111315;
+  --color-night-2: #1b1e21;
+  --color-night-3: #26292d;
+  --color-paper: #ece6da;
+  --color-paper-muted: #b9b3a8;
+  --color-st-life: #b3261e;
+  --color-st-risk: #d9480f;
+  --color-st-relief: #a9832b;
+  --color-st-safe: #2e6b45;
+  --color-st-none: #8a8f94;
+  --color-st-assigned: #16181b;
+
+  --font-sans: 'General Sans', 'Noto Sans Malayalam', 'Noto Sans Devanagari', sans-serif;
+
+  --radius-none: 0;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+:root {
+  --bg: #ece6da;
+  --surface: #e2dacb;
+  --ink: #16181b;
+  --muted: #4f5458;
+  --accent: #d9480f;
+  --st-life: #b3261e;
+  --st-risk: #d9480f;
+  --st-relief: #a9832b;
+  --st-safe: #2e6b45;
+  --st-none: #8a8f94;
+  --st-assigned: #16181b;
+  --margin: 24px;
+  --dur-state: 160ms;
+  --dur-enter: 420ms;
+  --dur-scene: 700ms;
+  --dur-sign: 1200ms;
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
+  --step-display: clamp(3.4rem, 1rem + 7vw, 9rem);
+  color-scheme: light;
+}
+
+@media (max-width: 767px) {
+  :root { --margin: 16px; }
+}
+
+* { border-radius: 0; }
+
+html {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-size: var(--step-body);
+  line-height: 1.5;
+  font-feature-settings: 'tnum' 1;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 100svh;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+p { text-wrap: pretty; }
+
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--ink); color: var(--bg); }
+
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+input, select, textarea, button { font: inherit; color: inherit; }
+
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* Interactive states: colour changes only, no movement. */
+.link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; text-decoration-color: transparent; }
+.link:hover { text-decoration-color: currentColor; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6em;
+  min-height: 48px; padding: 0 1.25em;
+  font-weight: 500; line-height: 1;
+  background: var(--ink); color: var(--bg);
+  cursor: pointer; user-select: none; white-space: nowrap;
+}
+.btn:hover { background: #2a2d31; }
+.btn:active { background: #000; }
+.btn[disabled], .btn[aria-disabled='true'] { opacity: 0.45; cursor: not-allowed; }
+.btn-accent { background: var(--accent); color: var(--ink); }
+.btn-accent:hover { background: #e4561c; }
+.btn-accent:active { background: #b93c0b; }
+.btn-paper { background: var(--bg); color: var(--ink); }
+.btn-paper:hover { background: #f3eee5; }
+.btn-paper:active { background: var(--surface); }
+.btn-quiet { background: var(--surface); color: var(--ink); }
+.btn-quiet:hover { background: #d6cdbb; }
+.btn-quiet:active { background: #c9bfab; }
+.btn-danger { background: var(--st-life); color: #f6efe6; }
+.btn-danger:hover { background: #c4302a; }
+.btn-safe { background: var(--st-safe); color: #f2ece2; }
+.btn-safe:hover { background: #347a4f; }
+.btn-sm { min-height: 36px; padding: 0 0.85em; font-size: var(--step-small); }
+
+.field {
+  display: block; width: 100%; min-height: 48px; padding: 0.7em 0.85em;
+  background: #f4f0e8; color: var(--ink);
+  border: 0; box-shadow: inset 0 -2px 0 var(--ink);
+}
+.field:focus { outline: none; box-shadow: inset 0 -3px 0 var(--accent); background: #f8f5ef; }
+.field::placeholder { color: #7d8085; }
+textarea.field { min-height: 120px; resize: vertical; }
+.on-night .field { background: #1f2226; color: #ece6da; box-shadow: inset 0 -2px 0 #8a8f94; }
+.on-night .field:focus { box-shadow: inset 0 -3px 0 var(--accent); background: #24272b; }
+.on-night .field::placeholder { color: #8a8f94; }
+
+.label { display: block; font-size: var(--step-small); font-weight: 500; margin-bottom: 0.4em; }
+
+/* A real data table may keep its lines. */
+table.data { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+table.data th { text-align: left; font-weight: 500; padding: 0.6em 0.75em; position: sticky; top: 0; }
+table.data td { padding: 0.6em 0.75em; vertical-align: top; }
+
+.wrap { padding-left: var(--margin); padding-right: var(--margin); }
+.measure { max-width: 66ch; }
+
+/* Section entrance: visible without script; the script adds data-reveal then animates. */
+[data-reveal='pending'] [data-r] { opacity: 0; transform: translateY(24px); }
+
+.ring-breathe { transform-box: fill-box; transform-origin: center; animation: breathe 4s var(--ease-in-out) infinite; }
+@keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+
+.listening { animation: listen 2.4s linear infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes listen { to { transform: rotate(360deg); } }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  [data-reveal='pending'] [data-r] { opacity: 1; transform: none; }
+}
+
+/* MapLibre: keep controls flat and on palette. */
+.maplibregl-ctrl-group { border-radius: 0 !important; box-shadow: none !important; background: var(--bg) !important; }
+.maplibregl-ctrl-group button { border-radius: 0 !important; }
+.maplibregl-ctrl-attrib { background: rgba(236, 230, 218, 0.85) !important; font-size: 11px; }
+.maplibregl-ctrl-attrib a { color: var(--ink) !important; }
+.maplibregl-popup-content { border-radius: 0 !important; box-shadow: none !important; background: var(--ink) !important; color: var(--bg) !important; padding: 12px 14px !important; }
+.maplibregl-popup-tip { display: none !important; }
